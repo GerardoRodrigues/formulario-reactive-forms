@@ -1,20 +1,31 @@
 import { Routes } from '@angular/router';
-import { StepPersonal } from './features/user-informations/pages/step-personal/step-personal';
-import { StepProfessional } from './features/user-informations/pages/step-professional/step-professional';
-import { ResumeInformations } from './features/user-informations/pages/resume-informations/resume-informations';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'personal', pathMatch: 'full' },
   {
     path: 'personal',
-    component: StepPersonal,
+    loadComponent: () =>
+      import('./features/user-informations/pages/step-personal/step-personal').then(
+        (m) => m.StepPersonal,
+      ),
   },
   {
     path: 'professional',
-    component: StepProfessional,
+    loadComponent: () =>
+      import('./features/user-informations/pages/step-professional/step-professional').then(
+        (m) => m.StepProfessional,
+      ),
   },
   {
     path: 'resume-informations',
-    component: ResumeInformations,
+    loadComponent: () =>
+      import('./features/user-informations/pages/resume-informations/resume-informations').then(
+        (m) => m.ResumeInformations,
+      ),
+  },
+  {
+    path: '**',
+    redirectTo: 'personal',
+    pathMatch: 'full',
   },
 ];
