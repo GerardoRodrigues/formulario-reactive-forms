@@ -20,7 +20,7 @@ export class StatesAndCitiesApi {
 
   getCities(state: string) {
     return this._httpClient
-      .post<ICitiesResponse>('https://countriesnow.space/api/v0.1/countries/states/cities', {
+      .post<ICitiesResponse>('https://countriesnow.space/api/v0.1/countries/state/cities', {
         country: 'Brazil',
         state,
       })
