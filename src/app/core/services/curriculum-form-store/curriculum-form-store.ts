@@ -15,7 +15,7 @@ export class CurriculumFormStore {
       address: ['', [Validators.required]],
       state: ['', [Validators.required]],
       city: ['', [Validators.required]],
-      maritalStatus: ['', [Validators.required]],
+      maritalStatus: ['solteiro', [Validators.required]],
     }),
     professional: this._formBuilder.array([
       this._formBuilder.group({
