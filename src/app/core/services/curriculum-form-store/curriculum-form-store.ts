@@ -11,8 +11,8 @@ export class CurriculumFormStore {
     personal: this._formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      age: ['', [Validators.required]],
-      address: ['', [Validators.required]],
+      age: ['', [Validators.required, Validators.min(18)]],
+      address: ['', [Validators.required, Validators.pattern(/^[^,]+,\s*[^,]+,\s*[^,]+$/)]],
       state: ['', [Validators.required]],
       city: ['', [Validators.required]],
       maritalStatus: ['solteiro', [Validators.required]],

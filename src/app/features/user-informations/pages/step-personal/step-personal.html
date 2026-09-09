@@ -24,7 +24,11 @@
         class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-colors"
         formControlName="email"
         appInputValidationDirective
-        errorMessage="O campo Email é obrigatório"
+        [errorMessage]="
+          _curriculumFormStore.personalGroupForm.get('email')?.hasError('email')
+            ? 'O campo E-mail é inválido'
+            : 'O campo E-mail é obrigatório'
+        "
       />
     </div>
 
@@ -36,7 +40,11 @@
         class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-colors"
         formControlName="age"
         appInputValidationDirective
-        errorMessage="O campo Idade é obrigatório"
+        [errorMessage]="
+          _curriculumFormStore.personalGroupForm.get('age')?.hasError('min')
+            ? 'O campo Idade deve ser no mínimo 18 anos'
+            : 'O campo Idade é obrigatório'
+        "
       />
     </div>
 
@@ -48,7 +56,11 @@
         class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-colors"
         formControlName="address"
         appInputValidationDirective
-        errorMessage="O campo Endereço é obrigatório"
+        [errorMessage]="
+          _curriculumFormStore.personalGroupForm.get('address')?.hasError('pattern')
+            ? 'O campo Endereço deve seguir o padrão: Rua, Número, Bairro'
+            : 'O campo Endereço é obrigatório'
+        "
       />
     </div>
 

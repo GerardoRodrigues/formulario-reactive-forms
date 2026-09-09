@@ -5,8 +5,10 @@ import {
   HostListener,
   inject,
   Input,
+  OnChanges,
   OnInit,
   Renderer2,
+  SimpleChanges,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NgControl } from '@angular/forms';
@@ -14,7 +16,7 @@ import { NgControl } from '@angular/forms';
 @Directive({
   selector: '[appInputValidationDirective]',
 })
-export class InputValidationDirective implements OnInit {
+export class InputValidationDirective implements OnInit, OnChanges {
   private readonly _ngControl = inject(NgControl, { self: true });
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _elementRef = inject(ElementRef);
@@ -28,6 +30,12 @@ export class InputValidationDirective implements OnInit {
     this._ngControl.statusChanges?.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
       this.updateStatus();
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['errorMessage']) {
+      this._renderer2.setProperty(this.errorElement, 'textContent', this.errorMessage);
+    }
   }
 
   @HostListener('blur')
@@ -97,7 +105,7 @@ export class InputValidationDirective implements OnInit {
   }
 
   hideError() {
-    if(!this.errorElement) return;
+    if (!this.errorElement) return;
 
     const parent = this._elementRef.nativeElement.parentNode;
     this._renderer2.removeChild(parent, this.errorElement);
