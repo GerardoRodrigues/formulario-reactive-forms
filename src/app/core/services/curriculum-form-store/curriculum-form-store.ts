@@ -17,14 +17,21 @@ export class CurriculumFormStore {
       city: ['', [Validators.required]],
       maritalStatus: ['solteiro', [Validators.required]],
     }),
-    professional: this._formBuilder.array([
-      this._formBuilder.group({
-        position: ['', [Validators.required]],
-        company: ['', [Validators.required]],
-        description: ['', [Validators.required]],
-      }),
-    ]),
+    professional: this._formBuilder.array(
+      [
+        this._formBuilder.group({
+          position: ['', [Validators.required]],
+          company: ['', [Validators.required]],
+          description: ['', [Validators.required]],
+        }),
+      ],
+      [Validators.required],
+    ),
   });
+
+  get curriculumFormGroup() {
+    return this.curriculumForm;
+  }
 
   get personalGroupForm() {
     return this.curriculumForm.get('personal') as FormGroup;
