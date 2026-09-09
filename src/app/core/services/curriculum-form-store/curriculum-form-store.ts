@@ -40,4 +40,15 @@ export class CurriculumFormStore {
   get professionalArrayForm() {
     return this.curriculumForm.get('professional') as FormArray;
   }
+
+  resetProfessionalArrayForm() {
+    this.professionalArrayForm.clear();
+    this.professionalArrayForm.push(
+      this._formBuilder.group({
+        position: ['', [Validators.required]],
+        company: ['', [Validators.required]],
+        description: ['', [Validators.required]],
+      }),
+    );
+  }
 }
